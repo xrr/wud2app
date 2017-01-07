@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <inttypes.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "rijndael.h"
 #include "sha1.h"
 #include "fst.h"
@@ -204,7 +205,7 @@ int main(int argc, char *argv[])
 	}
 
 	//create output folder
-	mkdir(outDir);
+	mkdir(outDir,S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH);
 
 	//dont care about first header but only about data
 	uint64_t offset = ((uint64_t)__builtin_bswap32(tbl[siPart].offsetBE))*0x8000;
